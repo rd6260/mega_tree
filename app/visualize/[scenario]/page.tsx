@@ -279,46 +279,46 @@ const VisualizationPage = ({ params }: { params: Promise<{ scenario: string }> }
   if (phase === 'intro') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center p-8">
-        <div className="max-w-4xl w-full space-y-8 text-center">
-          <div className="space-y-4">
-            <h1 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
+        <div className="max-w-3xl w-full space-y-6 text-center">
+          <div className="space-y-3">
+            <h1 className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
               {scenarioTitle}
             </h1>
-            <p className="text-xl text-slate-400 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base text-slate-400 leading-relaxed max-w-2xl mx-auto">
               {scenarioDescription}
             </p>
           </div>
 
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-3xl border border-slate-700/50 p-12 space-y-8">
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-8 space-y-6">
             <div className="flex items-center justify-center gap-2 text-cyan-400">
-              <Sparkles className="w-6 h-6" />
-              <span className="text-lg font-semibold">Let's Get Started</span>
+              <Sparkles className="w-5 h-5" />
+              <span className="text-base font-semibold">Let's Get Started</span>
             </div>
 
-            <div className="grid gap-6">
+            <div className="grid gap-4">
               <button
                 onClick={handleShowFullTree}
-                className="group relative px-8 py-6 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-bold text-xl rounded-2xl shadow-2xl hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105 overflow-hidden"
+                className="group relative px-6 py-4 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-bold text-base rounded-xl shadow-xl hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-[1.02] overflow-hidden"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative flex items-center justify-center gap-3">
-                  <Eye className="w-6 h-6" />
+                <div className="relative flex items-center justify-center gap-2.5">
+                  <Eye className="w-5 h-5" />
                   <span>View Complete Tree Structure</span>
                 </div>
               </button>
 
               <button
                 onClick={handleStartPlayground}
-                className="px-8 py-6 bg-slate-700/50 hover:bg-slate-700 text-white font-bold text-xl rounded-2xl border-2 border-slate-600 hover:border-slate-500 transition-all duration-300 hover:scale-105 flex items-center justify-center gap-3"
+                className="px-6 py-4 bg-slate-700/50 hover:bg-slate-700 text-white font-bold text-base rounded-xl border-2 border-slate-600 hover:border-slate-500 transition-all duration-300 hover:scale-[1.02] flex items-center justify-center gap-2.5"
               >
-                <Settings className="w-6 h-6" />
+                <Settings className="w-5 h-5" />
                 <span>Jump to Interactive Playground</span>
               </button>
             </div>
 
             <button
               onClick={() => router.push('/scenario')}
-              className="text-slate-400 hover:text-white transition-colors duration-300"
+              className="text-sm text-slate-400 hover:text-white transition-colors duration-300"
             >
               ← Change Scenario
             </button>
