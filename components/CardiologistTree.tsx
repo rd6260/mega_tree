@@ -193,24 +193,17 @@ export const CardiologistTreeVisualization: React.FC<{
             <g key={node.id} className="transition-all duration-500" style={{ animation: isActive ? 'float 2s ease-in-out infinite' : 'none' }}>
               {isActive && (
                 <>
-                  <circle cx={node.x} cy={node.y} r="70" fill="url(#activeGradient)" opacity="0.1" filter="url(#strongGlow)" className="animate-ping" style={{ animationDuration: '2s' }} />
-                  <circle cx={node.x} cy={node.y} r="55" fill="none" stroke="url(#activeGradient)" strokeWidth="2" opacity="0.4" className="animate-pulse" />
+                  <rect x={node.x - 75} y={node.y - 35} width="150" height="70" rx="12" fill="url(#activeGradient)" opacity="0.1" filter="url(#strongGlow)" className="animate-ping" style={{ animationDuration: '2s' }} />
+                  <rect x={node.x - 70} y={node.y - 32} width="140" height="64" rx="10" fill="none" stroke="url(#activeGradient)" strokeWidth="2" opacity="0.4" className="animate-pulse" />
                 </>
               )}
               
-              {isLeafNode ? (
-                <>
-                  <rect x={node.x - 65} y={node.y - 35} width="130" height="70" rx="12" className="fill-slate-900 transition-all duration-500" />
-                  <rect x={node.x - 62} y={node.y - 32} width="124" height="64" rx="10" fill={`url(#node-gradient-${node.id})`} filter={isActive ? "url(#glow)" : "none"} />
-                  <rect x={node.x - 62} y={node.y - 32} width="124" height="64" rx="10" fill="none" stroke={colors.border} strokeWidth={isActive ? "3" : "2"} opacity={isActive ? 1 : 0.6} />
-                </>
-              ) : (
-                <>
-                  <ellipse cx={node.x} cy={node.y} rx="70" ry="38" className="fill-slate-900 transition-all duration-500" />
-                  <ellipse cx={node.x} cy={node.y} rx="67" ry="35" fill={`url(#node-gradient-${node.id})`} filter={isActive ? "url(#glow)" : "none"} />
-                  <ellipse cx={node.x} cy={node.y} rx="67" ry="35" fill="none" stroke={colors.border} strokeWidth={isActive ? "3" : "2"} opacity={isActive ? 1 : 0.6} />
-                </>
-              )}
+              {/* Node Background Shadow */}
+              <rect x={node.x - 62} y={node.y - 28} width="124" height="56" rx="10" className="fill-slate-900 transition-all duration-500" />
+              
+              {/* Node Main */}
+              <rect x={node.x - 60} y={node.y - 30} width="120" height="60" rx="10" fill={`url(#node-gradient-${node.id})`} filter={isActive ? "url(#glow)" : "none"} />
+              <rect x={node.x - 60} y={node.y - 30} width="120" height="60" rx="10" fill="none" stroke={colors.border} strokeWidth={isActive ? "3" : "2"} opacity={isActive ? 1 : 0.6} />
               
               <defs>
                 <linearGradient id={`node-gradient-${node.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
@@ -219,14 +212,14 @@ export const CardiologistTreeVisualization: React.FC<{
                 </linearGradient>
               </defs>
 
-              <text x={node.x} y={node.y + 5} fill="white" fontSize={isLeafNode ? "12" : "14"} fontWeight="700" textAnchor="middle" className="drop-shadow-lg">
+              <text x={node.x} y={node.y} fill="white" fontSize="12" fontWeight="700" textAnchor="middle" className="drop-shadow-lg">
                 {node.label.split('\n').map((line, i) => (
-                  <tspan key={i} x={node.x} dy={i === 0 ? 0 : 16}>{line}</tspan>
+                  <tspan key={i} x={node.x} dy={i === 0 ? -5 : 16}>{line}</tspan>
                 ))}
               </text>
 
               {isLeafNode && style !== 'default' && (
-                <text x={node.x} y={node.y + 60} fill={colors.border} fontSize="28" textAnchor="middle">
+                <text x={node.x} y={node.y + 55} fill={colors.border} fontSize="24" textAnchor="middle">
                   {node.outcome === 'emergency' ? '🚨' : node.outcome === 'treatment' ? '💊' : node.outcome === 'lifestyle' ? '🏃' : '🥗'}
                 </text>
               )}
