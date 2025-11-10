@@ -239,7 +239,7 @@ const Landing = () => {
               No coding. No math walls. Just pure, visual learning.
             </p>
             <button
-              onClick={() => handleNavigate('/visualize')}
+              onClick={() => handleNavigate('/scenario')}
               className="bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white px-10 py-6 text-lg rounded-full shadow-lg hover:shadow-emerald-500/50 transition-all duration-300"
             >
               Get Started Now
