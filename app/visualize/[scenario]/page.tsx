@@ -358,12 +358,12 @@ const VisualizationPage = ({ params }: { params: Promise<{ scenario: string }> }
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-white">{scenarioTitle}</h1>
-            <p className="text-slate-400 mt-1">Interactive Playground</p>
+            <h1 className="text-2xl font-bold text-white">{scenarioTitle}</h1>
+            <p className="text-slate-400 mt-0.5 text-sm">Interactive Playground</p>
           </div>
           <button
             onClick={() => router.push('/scenario')}
-            className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-all duration-300 border border-slate-700"
+            className="px-3.5 py-2 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-all duration-300 border border-slate-700"
           >
             ← Change Scenario
           </button>
