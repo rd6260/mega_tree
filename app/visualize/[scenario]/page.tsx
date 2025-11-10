@@ -190,14 +190,27 @@ const VisualizationPage = ({ params }: { params: Promise<{ scenario: string }> }
   }, [isPlaying, currentStep, studentSequence, cardioSequence, isStudent]);
 
   const handleShowFullTree = () => {
+    // Show ALL nodes immediately for full tree view
     if (isStudent) {
-      const sequence = studentController.executeDecisionTree(studentData);
-      setStudentSequence(sequence);
-      setCurrentStep(sequence.length - 1);
+      const allNodes = studentController.getNodes();
+      const fullTreeSequence: AnimationStep[] = [{
+        nodeId: 0,
+        description: 'Complete decision tree structure showing all possible paths',
+        visibleNodes: allNodes.map(n => n.id),
+        visibleEdges: allNodes.filter(n => n.parent !== null).map(n => ({ from: n.parent as number, to: n.id }))
+      }];
+      setStudentSequence(fullTreeSequence);
+      setCurrentStep(0);
     } else {
-      const sequence = cardioController.executeDecisionTree(cardioData);
-      setCardioSequence(sequence);
-      setCurrentStep(sequence.length - 1);
+      const allNodes = cardioController.getNodes();
+      const fullTreeSequence: CardiologistAnimationStep[] = [{
+        nodeId: 0,
+        description: 'Complete decision tree structure showing all possible paths',
+        visibleNodes: allNodes.map(n => n.id),
+        visibleEdges: allNodes.filter(n => n.parent !== null).map(n => ({ from: n.parent as number, to: n.id }))
+      }];
+      setCardioSequence(fullTreeSequence);
+      setCurrentStep(0);
     }
     setPhase('fullTree');
     setIsPlaying(false);
