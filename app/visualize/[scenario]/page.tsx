@@ -526,9 +526,9 @@ const StudentInputs: React.FC<{
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">Attendance Rate (%)</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Attendance Rate (%)</label>
         <input
           type="range"
           min="0"
@@ -536,13 +536,13 @@ const StudentInputs: React.FC<{
           value={data.attendanceRate}
           onChange={(e) => updateField('attendanceRate', parseInt(e.target.value))}
           disabled={disabled}
-          className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
+          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
         />
-        <div className="text-right text-cyan-400 font-bold text-sm mt-1">{data.attendanceRate}%</div>
+        <div className="text-right text-cyan-400 font-bold text-xs mt-1">{data.attendanceRate}%</div>
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">Homework Completion (%)</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Homework Completion (%)</label>
         <input
           type="range"
           min="0"
@@ -550,18 +550,18 @@ const StudentInputs: React.FC<{
           value={data.homeworkCompletion}
           onChange={(e) => updateField('homeworkCompletion', parseInt(e.target.value))}
           disabled={disabled}
-          className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
+          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-purple-500"
         />
-        <div className="text-right text-purple-400 font-bold text-sm mt-1">{data.homeworkCompletion}%</div>
+        <div className="text-right text-purple-400 font-bold text-xs mt-1">{data.homeworkCompletion}%</div>
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">Parent Involvement</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Parent Involvement</label>
         <select
           value={data.parentInvolvement}
           onChange={(e) => updateField('parentInvolvement', e.target.value)}
           disabled={disabled}
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white text-sm focus:border-cyan-500 focus:outline-none"
+          className="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-600 rounded-lg text-white text-xs focus:border-cyan-500 focus:outline-none"
         >
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
@@ -570,7 +570,7 @@ const StudentInputs: React.FC<{
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">Quiz Score</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Quiz Score</label>
         <input
           type="range"
           min="0"
@@ -578,18 +578,18 @@ const StudentInputs: React.FC<{
           value={data.quizScore}
           onChange={(e) => updateField('quizScore', parseInt(e.target.value))}
           disabled={disabled}
-          className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
+          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-blue-500"
         />
-        <div className="text-right text-blue-400 font-bold text-sm mt-1">{data.quizScore}</div>
+        <div className="text-right text-blue-400 font-bold text-xs mt-1">{data.quizScore}</div>
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">Participation Level</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Participation Level</label>
         <select
           value={data.participation}
           onChange={(e) => updateField('participation', e.target.value)}
           disabled={disabled}
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white text-sm focus:border-cyan-500 focus:outline-none"
+          className="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-600 rounded-lg text-white text-xs focus:border-cyan-500 focus:outline-none"
         >
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
@@ -598,7 +598,7 @@ const StudentInputs: React.FC<{
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">Study Hours/Week</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Study Hours/Week</label>
         <input
           type="range"
           min="0"
@@ -607,9 +607,9 @@ const StudentInputs: React.FC<{
           value={data.studyHours}
           onChange={(e) => updateField('studyHours', parseFloat(e.target.value))}
           disabled={disabled}
-          className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
         />
-        <div className="text-right text-amber-400 font-bold text-sm mt-1">{data.studyHours}h</div>
+        <div className="text-right text-amber-400 font-bold text-xs mt-1">{data.studyHours}h</div>
       </div>
     </div>
   );
