@@ -24,6 +24,10 @@ import {
   CardiologistPatientData,
   CardiologistAnimationStep
 } from '@/components/CardiologistTree';
+import { 
+  StaticStudentTreeVisualization, 
+  StaticCardiologistTreeVisualization 
+} from '@/components/StaticTreeComponents';
 
 type ScenarioType = 'student' | 'cardiologist';
 
