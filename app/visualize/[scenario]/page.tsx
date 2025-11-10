@@ -223,15 +223,26 @@ const VisualizationPage = ({ params }: { params: Promise<{ scenario: string }> }
   };
 
   const handleExecute = () => {
+    setCurrentStep(0);
+    setIsPlaying(false);
+    
+    // Execute tree with CURRENT data
     if (isStudent) {
+      console.log('Executing student tree with data:', studentData);
       const sequence = studentController.executeDecisionTree(studentData);
+      console.log('Generated sequence:', sequence);
       setStudentSequence(sequence);
     } else {
+      console.log('Executing cardio tree with data:', cardioData);
       const sequence = cardioController.executeDecisionTree(cardioData);
+      console.log('Generated sequence:', sequence);
       setCardioSequence(sequence);
     }
-    setCurrentStep(0);
-    setIsPlaying(true);
+    
+    // Start animation after a brief delay
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 100);
   };
 
   const handleReset = () => {
