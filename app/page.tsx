@@ -72,7 +72,7 @@ const Landing = () => {
               </p>
               <div className="flex flex-wrap gap-4">
                 <button
-                  onClick={() => handleNavigate('/visualize')}
+                  onClick={() => handleNavigate('/scenario')}
                   className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 flex items-center gap-2"
                 >
                   Start Learning <ArrowRight className="w-5 h-5" />
