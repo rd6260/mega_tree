@@ -57,41 +57,41 @@ const ScenarioSelection: React.FC = () => {
         </div>
 
         {/* Scenario Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl w-full">
+        <div className="grid md:grid-cols-2 gap-5 max-w-5xl w-full">
           {scenarios.map((scenario) => {
             const Icon = scenario.icon;
             return (
               <div
                 key={scenario.id}
                 onClick={() => handleSelect(scenario.id)}
-                className="group relative bg-slate-900/50 backdrop-blur-sm rounded-3xl border border-slate-700/50 overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:border-slate-600"
+                className="group relative bg-slate-900/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:border-slate-600"
               >
                 {/* Gradient overlay on hover */}
                 <div className={`absolute inset-0 bg-gradient-to-br ${scenario.bgGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
                 
-                <div className="relative p-8 space-y-6">
+                <div className="relative p-5 space-y-4">
                   {/* Icon */}
-                  <div className={`inline-flex p-4 rounded-2xl bg-gradient-to-br ${scenario.color} ${scenario.glowColor} shadow-2xl group-hover:scale-110 transition-transform duration-500`}>
-                    <Icon className="w-10 h-10 text-white" />
+                  <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${scenario.color} ${scenario.glowColor} shadow-xl group-hover:scale-110 transition-transform duration-500`}>
+                    <Icon className="w-7 h-7 text-white" />
                   </div>
 
                   {/* Title */}
                   <div>
-                    <h2 className="text-3xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 transition-all duration-300">
+                    <h2 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-400 transition-all duration-300">
                       {scenario.title}
                     </h2>
-                    <p className="text-slate-400 leading-relaxed">
+                    <p className="text-slate-400 leading-relaxed text-sm">
                       {scenario.description}
                     </p>
                   </div>
 
                   {/* Metrics */}
-                  <div className="space-y-2">
-                    <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Key Metrics</p>
-                    <div className="grid grid-cols-2 gap-2">
+                  <div className="space-y-1.5">
+                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Key Metrics</p>
+                    <div className="grid grid-cols-2 gap-1.5">
                       {scenario.metrics.map((metric, idx) => (
-                        <div key={idx} className="flex items-center gap-2 text-slate-300 text-sm">
-                          <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                        <div key={idx} className="flex items-center gap-1.5 text-slate-300 text-xs">
+                          <div className="w-1 h-1 rounded-full bg-cyan-400" />
                           {metric}
                         </div>
                       ))}
@@ -99,16 +99,16 @@ const ScenarioSelection: React.FC = () => {
                   </div>
 
                   {/* Button */}
-                  <div className={`flex items-center gap-2 text-white font-semibold group-hover:gap-4 transition-all duration-300 pt-4`}>
-                    <span className={`text-transparent bg-clip-text bg-gradient-to-r ${scenario.color}`}>
+                  <div className={`flex items-center gap-2 text-white font-semibold group-hover:gap-3 transition-all duration-300 pt-2`}>
+                    <span className={`text-transparent bg-clip-text bg-gradient-to-r ${scenario.color} text-sm`}>
                       Explore Scenario
                     </span>
-                    <ArrowRight className={`w-5 h-5 text-cyan-400 group-hover:translate-x-2 transition-transform duration-300`} />
+                    <ArrowRight className={`w-4 h-4 text-cyan-400 group-hover:translate-x-2 transition-transform duration-300`} />
                   </div>
                 </div>
 
                 {/* Decorative corner element */}
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${scenario.color} opacity-10 blur-2xl group-hover:opacity-20 transition-opacity duration-500`} />
+                <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-br ${scenario.color} opacity-10 blur-2xl group-hover:opacity-20 transition-opacity duration-500`} />
               </div>
             );
           })}
