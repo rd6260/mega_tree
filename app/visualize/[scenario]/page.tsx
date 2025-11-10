@@ -313,41 +313,32 @@ const VisualizationPage = ({ params }: { params: Promise<{ scenario: string }> }
 
   // Full Tree Phase
   if (phase === 'fullTree') {
-    const sequence = isStudent ? studentSequence : cardioSequence;
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-8">
-        <div className="max-w-7xl mx-auto space-y-6">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold text-white">{scenarioTitle}</h1>
-            <p className="text-slate-400">Complete decision tree structure</p>
+        <div className="max-w-7xl mx-auto space-y-5">
+          <div className="text-center space-y-2">
+            <h1 className="text-3xl font-bold text-white">{scenarioTitle}</h1>
+            <p className="text-slate-400 text-sm">Complete decision tree structure</p>
           </div>
 
-          <div className="bg-slate-800/50 backdrop-blur-sm rounded-3xl border border-slate-700/50 p-8">
+          <div className="bg-slate-800/30 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6">
             {isStudent ? (
-              <TreeVisualization
-                nodes={studentController.getNodes()}
-                currentStep={currentStep}
-                animationSequence={sequence}
-              />
+              <StaticStudentTreeVisualization />
             ) : (
-              <CardiologistTreeVisualization
-                nodes={cardioController.getNodes()}
-                currentStep={currentStep}
-                animationSequence={sequence}
-              />
+              <StaticCardiologistTreeVisualization />
             )}
           </div>
 
-          <div className="flex justify-center gap-4">
+          <div className="flex justify-center gap-3">
             <button
               onClick={() => setPhase('intro')}
-              className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-xl transition-all duration-300"
+              className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition-all duration-300"
             >
               ← Back
             </button>
             <button
               onClick={handleStartPlayground}
-              className="px-8 py-3 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105"
+              className="px-6 py-2.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-bold text-sm rounded-lg shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-[1.02]"
             >
               Start Interactive Playground →
             </button>
