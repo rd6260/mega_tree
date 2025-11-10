@@ -2,6 +2,14 @@
 
 An interactive educational platform for learning decision trees through beautiful visualizations and real-world scenarios.
 
+## screenshots
+
+![screenshot 01](./src/ss01.png)
+![screenshot 02](./src/ss02.png)
+![screenshot 03](./src/ss03.png)
+![screenshot 04](./src/ss04.png)
+
+
 ## 🌟 Features
 
 - **Two Real-World Scenarios**:
