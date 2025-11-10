@@ -27,7 +27,7 @@ const Landing = () => {
               <a href="#about" className="text-gray-300 hover:text-emerald-400 transition-colors">About</a>
               <a href="#features" className="text-gray-300 hover:text-emerald-400 transition-colors">Features</a>
               <button
-                onClick={() => handleNavigate('/visualize')}
+                onClick={() => handleNavigate('/scenario')}
                 className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full transition-all duration-300"
               >
                 Get Started
