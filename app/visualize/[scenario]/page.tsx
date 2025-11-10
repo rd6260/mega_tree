@@ -369,51 +369,51 @@ const VisualizationPage = ({ params }: { params: Promise<{ scenario: string }> }
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-5">
           {/* Left Panel - Inputs and Presets */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-4">
+            {/* Execute Button - Moved to top */}
+            <button
+              onClick={handleExecute}
+              disabled={isPlaying}
+              className="w-full px-5 py-3 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-bold text-base rounded-xl shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            >
+              {isPlaying ? 'Analyzing...' : 'Execute Decision Tree'}
+            </button>
+
             {/* Preset Profiles */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6">
-              <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-cyan-400" />
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-4">
+              <h3 className="text-base font-bold text-white mb-3 flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-cyan-400" />
                 Preset Profiles
               </h3>
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 {presets.map((preset, idx) => (
                   <button
                     key={idx}
                     onClick={() => handlePresetSelect(idx)}
-                    className={`w-full text-left p-3 rounded-xl transition-all duration-300 ${
+                    className={`w-full text-left p-2.5 rounded-lg transition-all duration-300 ${
                       selectedPreset === idx
                         ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/20'
                         : 'bg-slate-700/30 hover:bg-slate-700/50 border-2 border-transparent'
                     }`}
                   >
-                    <div className="font-semibold text-white text-sm">{preset.name}</div>
-                    <div className="text-xs text-slate-400 mt-1">{preset.description}</div>
+                    <div className="font-semibold text-white text-xs">{preset.name}</div>
+                    <div className="text-xs text-slate-400 mt-0.5">{preset.description}</div>
                   </button>
                 ))}
               </div>
             </div>
 
             {/* Input Controls */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6">
-              <h3 className="text-lg font-bold text-white mb-4">Adjust Parameters</h3>
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-4">
+              <h3 className="text-base font-bold text-white mb-3">Adjust Parameters</h3>
               {isStudent ? (
                 <StudentInputs data={studentData} onChange={setStudentData} disabled={isPlaying} />
               ) : (
                 <CardiologistInputs data={cardioData} onChange={setCardioData} disabled={isPlaying} />
               )}
             </div>
-
-            {/* Execute Button */}
-            <button
-              onClick={handleExecute}
-              disabled={isPlaying}
-              className="w-full px-6 py-4 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-bold text-lg rounded-xl shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-            >
-              {isPlaying ? 'Analyzing...' : 'Execute Decision Tree'}
-            </button>
           </div>
 
           {/* Right Panel - Visualization */}
