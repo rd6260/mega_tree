@@ -133,7 +133,7 @@ export const TreeVisualization: React.FC<{
             
             if (!visible) return null;
 
-            const path = getCurvedPath(parentNode.x, parentNode.y + 40, node.x, node.y - 40);
+            const path = getCurvedPath(parentNode.x, parentNode.y + 30, node.x, node.y - 30);
             const midX = (parentNode.x + node.x) / 2;
             const midY = (parentNode.y + node.y) / 2;
 
@@ -165,7 +165,7 @@ export const TreeVisualization: React.FC<{
                     animation: active ? "dash 1s ease-in-out forwards" : "none"
                   }}
                 />
-                <circle cx={node.x} cy={node.y - 40} r="5" fill={active ? "#06b6d4" : "#475569"} filter={active ? "url(#glow)" : "none"} />
+                <circle cx={node.x} cy={node.y - 30} r="5" fill={active ? "#06b6d4" : "#475569"} filter={active ? "url(#glow)" : "none"} />
                 <g transform={`translate(${midX}, ${midY - 20})`}>
                   <rect x="-35" y="-14" width="70" height="28" rx="14" fill="#0f172a" stroke={active ? "#06b6d4" : "#475569"} strokeWidth="1.5" opacity="0.95" />
                   <text x="0" y="5" fill={active ? "#06b6d4" : "#94a3b8"} fontSize="12" fontWeight="600" textAnchor="middle" className="transition-all duration-300">
@@ -191,24 +191,17 @@ export const TreeVisualization: React.FC<{
             <g key={node.id} className="transition-all duration-500" style={{ animation: isActive ? 'float 2s ease-in-out infinite' : 'none' }}>
               {isActive && (
                 <>
-                  <circle cx={node.x} cy={node.y} r="70" fill="url(#activeGradient)" opacity="0.1" filter="url(#strongGlow)" className="animate-ping" style={{ animationDuration: '2s' }} />
-                  <circle cx={node.x} cy={node.y} r="55" fill="none" stroke="url(#activeGradient)" strokeWidth="2" opacity="0.4" className="animate-pulse" />
+                  <rect x={node.x - 75} y={node.y - 35} width="150" height="70" rx="12" fill="url(#activeGradient)" opacity="0.1" filter="url(#strongGlow)" className="animate-ping" style={{ animationDuration: '2s' }} />
+                  <rect x={node.x - 70} y={node.y - 32} width="140" height="64" rx="10" fill="none" stroke="url(#activeGradient)" strokeWidth="2" opacity="0.4" className="animate-pulse" />
                 </>
               )}
               
-              {isLeafNode ? (
-                <>
-                  <rect x={node.x - 60} y={node.y - 35} width="120" height="70" rx="12" className="fill-slate-900 transition-all duration-500" />
-                  <rect x={node.x - 57} y={node.y - 32} width="114" height="64" rx="10" fill={`url(#node-gradient-${node.id})`} filter={isActive ? "url(#glow)" : "none"} />
-                  <rect x={node.x - 57} y={node.y - 32} width="114" height="64" rx="10" fill="none" stroke={colors.border} strokeWidth={isActive ? "3" : "2"} opacity={isActive ? 1 : 0.6} />
-                </>
-              ) : (
-                <>
-                  <ellipse cx={node.x} cy={node.y} rx="65" ry="35" className="fill-slate-900 transition-all duration-500" />
-                  <ellipse cx={node.x} cy={node.y} rx="62" ry="32" fill={`url(#node-gradient-${node.id})`} filter={isActive ? "url(#glow)" : "none"} />
-                  <ellipse cx={node.x} cy={node.y} rx="62" ry="32" fill="none" stroke={colors.border} strokeWidth={isActive ? "3" : "2"} opacity={isActive ? 1 : 0.6} />
-                </>
-              )}
+              {/* Node Background Shadow */}
+              <rect x={node.x - 62} y={node.y - 28} width="124" height="56" rx="10" className="fill-slate-900 transition-all duration-500" />
+              
+              {/* Node Main */}
+              <rect x={node.x - 60} y={node.y - 30} width="120" height="60" rx="10" fill={`url(#node-gradient-${node.id})`} filter={isActive ? "url(#glow)" : "none"} />
+              <rect x={node.x - 60} y={node.y - 30} width="120" height="60" rx="10" fill="none" stroke={colors.border} strokeWidth={isActive ? "3" : "2"} opacity={isActive ? 1 : 0.6} />
               
               <defs>
                 <linearGradient id={`node-gradient-${node.id}`} x1="0%" y1="0%" x2="100%" y2="100%">
@@ -217,12 +210,12 @@ export const TreeVisualization: React.FC<{
                 </linearGradient>
               </defs>
 
-              <text x={node.x} y={node.y + 5} fill="white" fontSize={isLeafNode ? "13" : "14"} fontWeight="700" textAnchor="middle" className="drop-shadow-lg">
+              <text x={node.x} y={node.y + 5} fill="white" fontSize="13" fontWeight="700" textAnchor="middle" className="drop-shadow-lg">
                 {node.label}
               </text>
 
               {isLeafNode && style !== 'default' && (
-                <text x={node.x} y={node.y + 60} fill={colors.border} fontSize="28" textAnchor="middle">
+                <text x={node.x} y={node.y + 55} fill={colors.border} fontSize="24" textAnchor="middle">
                   {node.outcome === 'success' ? '⭐' : node.outcome === 'error' ? '⚙️' : '👏'}
                 </text>
               )}
