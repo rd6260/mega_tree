@@ -42,16 +42,16 @@ const ScenarioSelection: React.FC = () => {
 
       <div className="relative z-10 min-h-screen flex flex-col items-center justify-center p-8">
         {/* Header */}
-        <div className="text-center mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800/50 backdrop-blur-sm rounded-full border border-slate-700/50 mb-4">
-            <Sparkles className="w-4 h-4 text-cyan-400" />
-            <span className="text-slate-300 text-sm font-medium">Choose Your Scenario</span>
+        <div className="text-center mb-10 space-y-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-800/50 backdrop-blur-sm rounded-full border border-slate-700/50 mb-2">
+            <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="text-slate-300 text-xs font-medium">Choose Your Scenario</span>
           </div>
           
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
             Select a Decision Tree
           </h1>
-          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+          <p className="text-base text-slate-400 max-w-2xl mx-auto">
             Explore how decision trees work through real-world scenarios. Each scenario demonstrates different decision-making processes.
           </p>
         </div>
