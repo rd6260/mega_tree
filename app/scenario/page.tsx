@@ -117,7 +117,7 @@ const ScenarioSelection: React.FC = () => {
         {/* Back to Home */}
         <button
           onClick={() => router.push('/')}
-          className="mt-16 px-6 py-3 text-slate-400 hover:text-white border border-slate-700 hover:border-slate-600 rounded-xl transition-all duration-300 hover:scale-105"
+          className="mt-10 px-5 py-2.5 text-sm text-slate-400 hover:text-white border border-slate-700 hover:border-slate-600 rounded-lg transition-all duration-300 hover:scale-105"
         >
           ← Back to Home
         </button>
