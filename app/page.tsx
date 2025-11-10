@@ -260,61 +260,78 @@ const Landing = () => {
 
 const TreeGrowthAnimation = () => {
   return (
-    <div className="relative w-full h-96 flex items-end justify-center">
-      {/* Trunk */}
-      <div className="w-4 h-32 bg-gradient-to-t from-amber-900 to-amber-700 rounded-t-lg animate-[grow_1s_ease-out_0.5s_forwards] origin-bottom"
-        style={{ animation: 'grow 1s ease-out 0.5s forwards', transformOrigin: 'bottom' }} />
+    <div className="relative w-full h-96">
+      <svg className="w-full h-full" viewBox="0 0 400 400">
+        <defs>
+          <linearGradient id="trunkGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#b45309" />
+            <stop offset="100%" stopColor="#78350f" />
+          </linearGradient>
+        </defs>
 
-      {/* Branches */}
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
-        {/* Left Branch */}
-        <line x1="200" y1="280" x2="120" y2="200" stroke="#10b981" strokeWidth="3"
-          className="animate-[draw_0.8s_ease-out_1.5s_forwards]"
+        {/* Trunk */}
+        <rect x="195" y="280" width="10" height="80" rx="2" fill="url(#trunkGradient)"
+          style={{
+            transformOrigin: '200px 360px',
+            animation: 'grow 1s ease-out 0.5s forwards',
+            transform: 'scaleY(0)'
+          }} />
+
+        {/* Main Left Branch */}
+        <line x1="200" y1="280" x2="120" y2="200" stroke="#10b981" strokeWidth="3" strokeLinecap="round"
           strokeDasharray="113" strokeDashoffset="113"
           style={{ animation: 'draw 0.8s ease-out 1.5s forwards' }} />
 
-        {/* Right Branch */}
-        <line x1="200" y1="280" x2="280" y2="200" stroke="#10b981" strokeWidth="3"
-          className="animate-[draw_0.8s_ease-out_1.5s_forwards]"
+        {/* Main Right Branch */}
+        <line x1="200" y1="280" x2="280" y2="200" stroke="#10b981" strokeWidth="3" strokeLinecap="round"
           strokeDasharray="113" strokeDashoffset="113"
           style={{ animation: 'draw 0.8s ease-out 1.5s forwards' }} />
 
         {/* Sub-branches */}
-        <line x1="120" y1="200" x2="80" y2="140" stroke="#34d399" strokeWidth="2"
+        <line x1="120" y1="200" x2="80" y2="140" stroke="#34d399" strokeWidth="2" strokeLinecap="round"
           strokeDasharray="72" strokeDashoffset="72"
           style={{ animation: 'draw 0.6s ease-out 2.3s forwards' }} />
-        <line x1="120" y1="200" x2="160" y2="140" stroke="#34d399" strokeWidth="2"
+        <line x1="120" y1="200" x2="160" y2="140" stroke="#34d399" strokeWidth="2" strokeLinecap="round"
           strokeDasharray="72" strokeDashoffset="72"
           style={{ animation: 'draw 0.6s ease-out 2.3s forwards' }} />
-        <line x1="280" y1="200" x2="240" y2="140" stroke="#34d399" strokeWidth="2"
+        <line x1="280" y1="200" x2="240" y2="140" stroke="#34d399" strokeWidth="2" strokeLinecap="round"
           strokeDasharray="72" strokeDashoffset="72"
           style={{ animation: 'draw 0.6s ease-out 2.3s forwards' }} />
-        <line x1="280" y1="200" x2="320" y2="140" stroke="#34d399" strokeWidth="2"
+        <line x1="280" y1="200" x2="320" y2="140" stroke="#34d399" strokeWidth="2" strokeLinecap="round"
           strokeDasharray="72" strokeDashoffset="72"
           style={{ animation: 'draw 0.6s ease-out 2.3s forwards' }} />
+
+        {/* Leaf nodes at endpoints */}
+        {[
+          { x: 80, y: 140 },
+          { x: 160, y: 140 },
+          { x: 240, y: 140 },
+          { x: 320, y: 140 }
+        ].map((pos, i) => (
+          <circle
+            key={i}
+            cx={pos.x}
+            cy={pos.y}
+            r="12"
+            fill="#10b981"
+            opacity="0"
+            style={{
+              animation: `fadeIn 0.4s ease-out ${2.9 + i * 0.1}s forwards`
+            }}
+          />
+        ))}
+
+        {/* Root node */}
+        <rect x="175" y="255" width="50" height="30" rx="8" fill="#10b981" opacity="0"
+          style={{ animation: 'fadeIn 0.5s ease-out 3.3s forwards' }} />
+        <text x="200" y="275" fill="white" fontSize="14" fontWeight="bold" textAnchor="middle" opacity="0"
+          style={{ animation: 'fadeIn 0.5s ease-out 3.3s forwards' }}>
+          Root
+        </text>
       </svg>
 
-      {/* Leaves - positioned at branch endpoints */}
-      {[
-        { x: 80, y: 140 },
-        { x: 160, y: 140 },
-        { x: 240, y: 140 },
-        { x: 320, y: 140 }
-      ].map((pos, i) => (
-        <div
-          key={i}
-          className="absolute w-8 h-8 bg-emerald-500 rounded-full opacity-0 animate-[fadeIn_0.4s_ease-out_forwards]"
-          style={{
-            left: `${pos.x}px`,
-            top: `${pos.y}px`,
-            transform: 'translate(-50%, -50%)',
-            animationDelay: `${2.9 + i * 0.1}s`
-          }}
-        />
-      ))}
-
       {/* Sapling Icon */}
-      <div className="absolute top-8 left-1/2 -translate-x-1/2 opacity-0 animate-[spin-in_0.6s_ease-out_3.5s_forwards]"
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 opacity-0"
         style={{ animation: 'spin-in 0.6s ease-out 3.5s forwards' }}>
         <Sprout className="w-16 h-16 text-emerald-500" />
       </div>
@@ -328,16 +345,17 @@ const TreeGrowthAnimation = () => {
           to { stroke-dashoffset: 0; }
         }
         @keyframes fadeIn {
-          to { opacity: 1; }
+          from { opacity: 0; transform: scale(0.5); }
+          to { opacity: 1; transform: scale(1); }
         }
         @keyframes spin-in {
           from { 
             opacity: 0;
-            transform: translateX(-50%) scale(0) rotate(-180deg);
+            transform: translate(-50%, -50%) scale(0) rotate(-180deg);
           }
           to { 
             opacity: 1;
-            transform: translateX(-50%) scale(1) rotate(0deg);
+            transform: translate(-50%, -50%) scale(1) rotate(0deg);
           }
         }
       `}</style>
