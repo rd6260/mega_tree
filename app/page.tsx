@@ -1,127 +1,138 @@
+'use client';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Sprout, ArrowRight, Zap, Eye, Layers } from 'lucide-react';
-import Navbar from '../components/Navbar';
-import { Button } from '../components/ui/button';
+import { useRouter } from 'next/navigation';
+import { Sprout, ArrowRight, Zap, Eye, Layers, Menu, X } from 'lucide-react';
 
 const Landing = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
+
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+  const handleNavigate = (path: string) => {
+    router.push(path);
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#E8F5E9] via-[#FAFAFA] to-[#E3F2FD]">
-      <Navbar />
-      
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-slate-900 to-gray-900">
+      {/* Navbar */}
+      <nav className="fixed top-0 w-full z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Sprout className="w-8 h-8 text-emerald-500" />
+              <span className="text-xl font-bold text-white">MegaTree</span>
+            </div>
+
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#about" className="text-gray-300 hover:text-emerald-400 transition-colors">About</a>
+              <a href="#features" className="text-gray-300 hover:text-emerald-400 transition-colors">Features</a>
+              <button
+                onClick={() => handleNavigate('/visualize')}
+                className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full transition-all duration-300"
+              >
+                Get Started
+              </button>
+            </div>
+
+            <button
+              className="md:hidden text-gray-300"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {mobileMenuOpen && (
+            <div className="md:hidden mt-4 pb-4 space-y-4">
+              <a href="#about" className="block text-gray-300 hover:text-emerald-400">About</a>
+              <a href="#features" className="block text-gray-300 hover:text-emerald-400">Features</a>
+              <button
+                onClick={() => handleNavigate('/visualize')}
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full"
+              >
+                Get Started
+              </button>
+            </div>
+          )}
+        </div>
+      </nav>
+
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Left Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="z-10"
-            >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1B5E20] mb-6 leading-tight">
+            <div className="z-10">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
                 Learn decision trees by
-                <span className="bg-gradient-to-r from-[#2E7D32] to-[#1E88E5] bg-clip-text text-transparent"> growing them</span>
+                <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"> growing them</span>
               </h1>
-              <p className="text-lg sm:text-xl text-[#6B7280] mb-8 leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-400 mb-8 leading-relaxed">
                 Interactive, visual, and hands-on. Watch trees sprout, branch, and decide—across real-life scenarios from weather to healthcare.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Button
-                  data-testid="start-learning-btn"
-                  onClick={() => navigate('/lab')}
-                  className="bg-[#2E7D32] hover:bg-[#1B5E20] text-white px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                <button
+                  onClick={() => handleNavigate('/visualize')}
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-emerald-500/50 transition-all duration-300 flex items-center gap-2"
                 >
                   Start Learning <ArrowRight className="w-5 h-5" />
-                </Button>
-                <Button
-                  data-testid="quick-demo-btn"
-                  onClick={() => navigate('/lab?demo=weather')}
-                  variant="outline"
-                  className="border-2 border-[#2E7D32] text-[#2E7D32] hover:bg-[#E8F5E9] px-8 py-6 text-lg rounded-full transition-all duration-300"
-                >
-                  Quick Demo
-                </Button>
+                </button>
               </div>
-            </motion.div>
+            </div>
 
             {/* Right Animation */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="relative"
-            >
+            <div className="relative">
               <TreeGrowthAnimation />
-            </motion.div>
+            </div>
           </div>
         </div>
 
         {/* Background Decorations */}
-        <div className="absolute top-20 right-10 w-64 h-64 bg-[#81C784] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" />
-        <div className="absolute bottom-20 left-10 w-72 h-72 bg-[#90CAF9] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-20 right-10 w-64 h-64 bg-emerald-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-pulse" />
+        <div className="absolute bottom-20 left-10 w-72 h-72 bg-cyan-500/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-pulse" style={{ animationDelay: '1s' }} />
       </section>
 
       {/* What is Decision Tree Section */}
-      <section className="py-20 px-6 bg-white/50">
+      <section id="about" className="py-20 px-6 bg-gray-800/30">
         <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#111827] mb-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               What is a Decision Tree?
             </h2>
-            <p className="text-lg text-[#6B7280] max-w-3xl mx-auto">
+            <p className="text-lg text-gray-400 max-w-3xl mx-auto">
               A decision tree is like a flowchart that asks questions to make smart decisions. Each question splits your data, helping you predict outcomes or classify things.
             </p>
-          </motion.div>
+          </div>
 
           {/* Visual Flowchart Example */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-br from-[#E8F5E9] to-[#C8E6C9] rounded-2xl p-8 mb-12 max-w-2xl mx-auto"
-          >
+          <div className="bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 rounded-2xl p-8 mb-12 max-w-2xl mx-auto">
             <div className="flex flex-col items-center">
-              <div className="bg-[#2E7D32] text-white px-6 py-3 rounded-lg font-semibold mb-6">
+              <div className="bg-emerald-600 text-white px-6 py-3 rounded-lg font-semibold mb-6">
                 Will I enjoy outdoor activity?
               </div>
               <div className="flex items-center gap-4 mb-4">
-                <div className="text-sm text-[#6B7280] font-medium">Is it raining?</div>
+                <div className="text-sm text-gray-400 font-medium">Is it raining?</div>
               </div>
               <div className="grid grid-cols-2 gap-8 w-full max-w-md">
                 <div className="flex flex-col items-center">
-                  <div className="text-xs text-[#1B5E20] font-bold mb-2">YES ☂️</div>
-                  <div className="bg-white border-2 border-[#1E88E5] text-[#1E88E5] px-4 py-3 rounded-lg text-center font-medium text-sm">
-                    Stay Inside<br/>Read a Book
+                  <div className="text-xs text-emerald-400 font-bold mb-2">YES ☂️</div>
+                  <div className="bg-gray-900 border-2 border-cyan-500 text-cyan-400 px-4 py-3 rounded-lg text-center font-medium text-sm">
+                    Stay Inside<br />Read a Book
                   </div>
                 </div>
                 <div className="flex flex-col items-center">
-                  <div className="text-xs text-[#1B5E20] font-bold mb-2">NO ☀️</div>
-                  <div className="bg-white border-2 border-[#F9A825] text-[#F9A825] px-4 py-3 rounded-lg text-center font-medium text-sm">
-                    Go Outside<br/>Play Sports
+                  <div className="text-xs text-emerald-400 font-bold mb-2">NO ☀️</div>
+                  <div className="bg-gray-900 border-2 border-amber-500 text-amber-400 px-4 py-3 rounded-lg text-center font-medium text-sm">
+                    Go Outside<br />Play Sports
                   </div>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Why Use Decision Trees */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-12"
-          >
-            <h3 className="text-2xl sm:text-3xl font-bold text-center text-[#111827] mb-8">
+          <div className="mb-12">
+            <h3 className="text-2xl sm:text-3xl font-bold text-center text-white mb-8">
               Why Use Decision Trees?
             </h3>
             <div className="grid md:grid-cols-3 gap-6">
@@ -141,15 +152,11 @@ const Landing = () => {
                 description="Foundation for powerful methods like Random Forests and Gradient Boosting."
               />
             </div>
-          </motion.div>
+          </div>
 
           {/* Key Terms Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-2xl sm:text-3xl font-bold text-center text-[#111827] mb-8">
+          <div>
+            <h3 className="text-2xl sm:text-3xl font-bold text-center text-white mb-8">
               Key Terms to Know
             </h3>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -157,68 +164,63 @@ const Landing = () => {
                 emoji="🟢"
                 term="Node"
                 definition="A decision point that asks a question about your data."
-                color="from-[#E8F5E9] to-[#C8E6C9]"
+                color="from-emerald-900/50 to-emerald-800/50"
               />
               <TermCard
                 emoji="🍃"
                 term="Leaf"
                 definition="The final answer—no more questions, just a prediction!"
-                color="from-[#E3F2FD] to-[#BBDEFB]"
+                color="from-cyan-900/50 to-cyan-800/50"
               />
               <TermCard
                 emoji="✂️"
                 term="Split"
                 definition="Dividing data based on a feature's value (e.g., age > 30)."
-                color="from-[#FFF3E0] to-[#FFE082]"
+                color="from-amber-900/50 to-amber-800/50"
               />
               <TermCard
                 emoji="📊"
                 term="Gini Impurity"
                 definition="Measures how mixed the labels are. Lower = purer groups."
-                color="from-[#F3E5F5] to-[#E1BEE7]"
+                color="from-purple-900/50 to-purple-800/50"
               />
               <TermCard
                 emoji="📏"
                 term="Depth"
                 definition="How many levels of questions the tree has from top to bottom."
-                color="from-[#E0F2F1] to-[#B2DFDB]"
+                color="from-teal-900/50 to-teal-800/50"
               />
               <TermCard
                 emoji="🌿"
                 term="Pruning"
                 definition="Cutting back branches to prevent overfitting and simplify the tree."
-                color="from-[#FFF9C4] to-[#FFF59D]"
+                color="from-lime-900/50 to-lime-800/50"
               />
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* How it Works Section */}
-      <section className="py-20 px-6">
+      <section id="features" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold text-center text-[#111827] mb-16"
-          >
+          <h2 className="text-3xl sm:text-4xl font-bold text-center text-white mb-16">
             Learn by Doing
-          </motion.h2>
-          
+          </h2>
+
           <div className="grid md:grid-cols-3 gap-8">
             <FeatureCard
-              icon={<Eye className="w-8 h-8 text-[#2E7D32]" />}
+              icon={<Eye className="w-8 h-8 text-emerald-500" />}
               title="Show, Don't Tell"
               description="Watch trees grow node by node. See decisions unfold in real-time with animated branches and glowing paths."
             />
             <FeatureCard
-              icon={<Zap className="w-8 h-8 text-[#1E88E5]" />}
+              icon={<Zap className="w-8 h-8 text-cyan-500" />}
               title="Hands-On Learning"
               description="Grow, prune, trace, and tweak. Play with real datasets from weather forecasting to medical triage."
             />
             <FeatureCard
-              icon={<Layers className="w-8 h-8 text-[#F9A825]" />}
+              icon={<Layers className="w-8 h-8 text-amber-500" />}
               title="Real-Life Scenarios"
               description="Teacher prioritizing students, doctors triaging patients, farmers choosing crops—see decisions that matter."
             />
@@ -229,31 +231,26 @@ const Landing = () => {
       {/* CTA Section */}
       <section className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#111827] mb-6">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
               Ready to plant your first tree?
             </h2>
-            <p className="text-lg text-[#6B7280] mb-8">
+            <p className="text-lg text-gray-400 mb-8">
               No coding. No math walls. Just pure, visual learning.
             </p>
-            <Button
-              data-testid="get-started-cta-btn"
-              onClick={() => navigate('/lab')}
-              className="bg-gradient-to-r from-[#2E7D32] to-[#1E88E5] hover:from-[#1B5E20] hover:to-[#1565C0] text-white px-10 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            <button
+              onClick={() => handleNavigate('/visualize')}
+              className="bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-700 hover:to-cyan-700 text-white px-10 py-6 text-lg rounded-full shadow-lg hover:shadow-emerald-500/50 transition-all duration-300"
             >
               Get Started Now
-            </Button>
-          </motion.div>
+            </button>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 bg-white/30 border-t border-[#E5E7EB]">
-        <div className="max-w-6xl mx-auto text-center text-sm text-[#6B7280]">
+      <footer className="py-8 px-6 bg-gray-900/50 border-t border-gray-800">
+        <div className="max-w-6xl mx-auto text-center text-sm text-gray-500">
           <p>© 2025 Decision Tree Learning Lab. Built for curious minds.</p>
         </div>
       </footer>
@@ -265,144 +262,116 @@ const TreeGrowthAnimation = () => {
   return (
     <div className="relative w-full h-96 flex items-end justify-center">
       {/* Trunk */}
-      <motion.div
-        initial={{ height: 0 }}
-        animate={{ height: 120 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="w-4 bg-gradient-to-t from-[#6D4C41] to-[#8D6E63] rounded-t-lg"
-      />
-      
+      <div className="w-4 h-32 bg-gradient-to-t from-amber-900 to-amber-700 rounded-t-lg animate-[grow_1s_ease-out_0.5s_forwards] origin-bottom"
+        style={{ animation: 'grow 1s ease-out 0.5s forwards', transformOrigin: 'bottom' }} />
+
       {/* Branches */}
-      <motion.svg
-        className="absolute inset-0 w-full h-full"
-        viewBox="0 0 400 400"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1.5 }}
-      >
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
         {/* Left Branch */}
-        <motion.line
-          x1="200" y1="280" x2="120" y2="200"
-          stroke="#2E7D32"
-          strokeWidth="3"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-        />
+        <line x1="200" y1="280" x2="120" y2="200" stroke="#10b981" strokeWidth="3"
+          className="animate-[draw_0.8s_ease-out_1.5s_forwards]"
+          strokeDasharray="113" strokeDashoffset="113"
+          style={{ animation: 'draw 0.8s ease-out 1.5s forwards' }} />
+
         {/* Right Branch */}
-        <motion.line
-          x1="200" y1="280" x2="280" y2="200"
-          stroke="#2E7D32"
-          strokeWidth="3"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.8, delay: 1.5 }}
-        />
+        <line x1="200" y1="280" x2="280" y2="200" stroke="#10b981" strokeWidth="3"
+          className="animate-[draw_0.8s_ease-out_1.5s_forwards]"
+          strokeDasharray="113" strokeDashoffset="113"
+          style={{ animation: 'draw 0.8s ease-out 1.5s forwards' }} />
+
         {/* Sub-branches */}
-        <motion.line
-          x1="120" y1="200" x2="80" y2="140"
-          stroke="#81C784"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.6, delay: 2.3 }}
-        />
-        <motion.line
-          x1="120" y1="200" x2="160" y2="140"
-          stroke="#81C784"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.6, delay: 2.3 }}
-        />
-        <motion.line
-          x1="280" y1="200" x2="240" y2="140"
-          stroke="#81C784"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.6, delay: 2.3 }}
-        />
-        <motion.line
-          x1="280" y1="200" x2="320" y2="140"
-          stroke="#81C784"
-          strokeWidth="2"
-          initial={{ pathLength: 0 }}
-          animate={{ pathLength: 1 }}
-          transition={{ duration: 0.6, delay: 2.3 }}
-        />
-      </motion.svg>
-      
-      {/* Leaves */}
-      {[80, 160, 240, 320].map((x, i) => (
-        <motion.div
+        <line x1="120" y1="200" x2="80" y2="140" stroke="#34d399" strokeWidth="2"
+          strokeDasharray="72" strokeDashoffset="72"
+          style={{ animation: 'draw 0.6s ease-out 2.3s forwards' }} />
+        <line x1="120" y1="200" x2="160" y2="140" stroke="#34d399" strokeWidth="2"
+          strokeDasharray="72" strokeDashoffset="72"
+          style={{ animation: 'draw 0.6s ease-out 2.3s forwards' }} />
+        <line x1="280" y1="200" x2="240" y2="140" stroke="#34d399" strokeWidth="2"
+          strokeDasharray="72" strokeDashoffset="72"
+          style={{ animation: 'draw 0.6s ease-out 2.3s forwards' }} />
+        <line x1="280" y1="200" x2="320" y2="140" stroke="#34d399" strokeWidth="2"
+          strokeDasharray="72" strokeDashoffset="72"
+          style={{ animation: 'draw 0.6s ease-out 2.3s forwards' }} />
+      </svg>
+
+      {/* Leaves - positioned at branch endpoints */}
+      {[
+        { x: 80, y: 140 },
+        { x: 160, y: 140 },
+        { x: 240, y: 140 },
+        { x: 320, y: 140 }
+      ].map((pos, i) => (
+        <div
           key={i}
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.4, delay: 2.9 + i * 0.1 }}
-          className="absolute w-8 h-8 bg-[#4CAF50] rounded-full"
-          style={{ left: x, top: 130 }}
+          className="absolute w-8 h-8 bg-emerald-500 rounded-full opacity-0 animate-[fadeIn_0.4s_ease-out_forwards]"
+          style={{
+            left: `${pos.x}px`,
+            top: `${pos.y}px`,
+            transform: 'translate(-50%, -50%)',
+            animationDelay: `${2.9 + i * 0.1}s`
+          }}
         />
       ))}
-      
+
       {/* Sapling Icon */}
-      <motion.div
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ duration: 0.6, delay: 3.5 }}
-        className="absolute top-8 left-1/2 -translate-x-1/2"
-      >
-        <Sprout className="w-16 h-16 text-[#2E7D32]" />
-      </motion.div>
+      <div className="absolute top-8 left-1/2 -translate-x-1/2 opacity-0 animate-[spin-in_0.6s_ease-out_3.5s_forwards]"
+        style={{ animation: 'spin-in 0.6s ease-out 3.5s forwards' }}>
+        <Sprout className="w-16 h-16 text-emerald-500" />
+      </div>
+
+      <style jsx>{`
+        @keyframes grow {
+          from { transform: scaleY(0); }
+          to { transform: scaleY(1); }
+        }
+        @keyframes draw {
+          to { stroke-dashoffset: 0; }
+        }
+        @keyframes fadeIn {
+          to { opacity: 1; }
+        }
+        @keyframes spin-in {
+          from { 
+            opacity: 0;
+            transform: translateX(-50%) scale(0) rotate(-180deg);
+          }
+          to { 
+            opacity: 1;
+            transform: translateX(-50%) scale(1) rotate(0deg);
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
-const FeatureCard = ({ icon, title, description }) => {
+const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -8 }}
-      className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-[#E5E7EB]"
-    >
+    <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 hover:bg-gray-800/70 hover:border-gray-600 hover:-translate-y-2 transition-all duration-300">
       <div className="mb-4">{icon}</div>
-      <h3 className="text-xl font-semibold text-[#111827] mb-3">{title}</h3>
-      <p className="text-[#6B7280] leading-relaxed">{description}</p>
-    </motion.div>
+      <h3 className="text-xl font-semibold text-white mb-3">{title}</h3>
+      <p className="text-gray-400 leading-relaxed">{description}</p>
+    </div>
   );
 };
 
-const WhyCard = ({ icon, title, description }) => {
+const WhyCard = ({ icon, title, description }: { icon: string; title: string; description: string }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{ scale: 1.05 }}
-      className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-all duration-300 border border-[#E5E7EB] text-center"
-    >
+    <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-xl p-6 hover:bg-gray-800/70 hover:scale-105 transition-all duration-300 text-center">
       <div className="text-4xl mb-3">{icon}</div>
-      <h4 className="text-lg font-semibold text-[#111827] mb-2">{title}</h4>
-      <p className="text-sm text-[#6B7280] leading-relaxed">{description}</p>
-    </motion.div>
+      <h4 className="text-lg font-semibold text-white mb-2">{title}</h4>
+      <p className="text-sm text-gray-400 leading-relaxed">{description}</p>
+    </div>
   );
 };
 
-const TermCard = ({ emoji, term, definition, color }) => {
+const TermCard = ({ emoji, term, definition, color }: { emoji: string; term: string; definition: string; color: string }) => {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      whileHover={{ scale: 1.05, rotate: 2 }}
-      className={`bg-gradient-to-br ${color} rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300 border-2 border-white`}
-    >
+    <div className={`bg-gradient-to-br ${color} backdrop-blur-sm border border-gray-700 rounded-xl p-6 hover:scale-105 hover:rotate-2 transition-all duration-300`}>
       <div className="text-4xl mb-3">{emoji}</div>
-      <h4 className="text-lg font-bold text-[#111827] mb-2">{term}</h4>
-      <p className="text-sm text-[#6B7280] leading-relaxed">{definition}</p>
-    </motion.div>
+      <h4 className="text-lg font-bold text-white mb-2">{term}</h4>
+      <p className="text-sm text-gray-300 leading-relaxed">{definition}</p>
+    </div>
   );
 };
 
