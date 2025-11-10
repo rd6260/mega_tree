@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MegaTree - Decision Tree Visualization
 
-## Getting Started
+An interactive educational platform for learning decision trees through beautiful visualizations and real-world scenarios.
 
-First, run the development server:
+## 🌟 Features
+
+- **Two Real-World Scenarios**:
+  - 📚 **Student Performance Analyzer**: Evaluates academic performance based on attendance, homework, quiz scores, and more
+  - ❤️ **Cardiac Health Decision Tree**: Assesses cardiac risk factors for appropriate medical interventions
+
+- **Interactive Learning Flow**:
+  1. **Educational Landing Page**: Learn decision tree fundamentals
+  2. **Scenario Selection**: Choose your learning path
+  3. **Complete Tree View**: See the full decision tree structure
+  4. **Interactive Playground**: Adjust parameters and watch decisions unfold in real-time
+
+- **5 Preset Profiles Per Scenario**: Quick-start with pre-configured data sets
+- **Beautiful Animations**: Smooth tree traversal with animated edges and nodes
+- **Dark Theme**: Easy on the eyes with a modern, professional design
+- **Responsive Design**: Works seamlessly across devices
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ or npm package manager
+
+### Installation
 
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at `http://localhost:3000`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📖 How to Use
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Start at Landing Page** (`/`)
+   - Learn about decision trees
+   - Understand key concepts and terminology
 
-## Learn More
+2. **Select a Scenario** (`/scenario`)
+   - Choose between Student Performance Analyzer or Cardiac Health Decision Tree
 
-To learn more about Next.js, take a look at the following resources:
+3. **Explore the Scenario** (`/visualize/[scenario]`)
+   - **Intro Phase**: Learn about the specific scenario
+   - **Full Tree View**: See the complete decision tree structure
+   - **Interactive Playground**:
+     - Select from 5 preset profiles
+     - Adjust individual parameters with sliders
+     - Execute the decision tree to see animated visualization
+     - Step through the decision-making process
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎯 Decision Tree Structures
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Student Performance Analyzer
 
-## Deploy on Vercel
+**Root Node**: Attendance Rate
+- Branches based on: Attendance, Homework Completion, Parent Involvement, Quiz Score, Participation, Study Hours
+- **Outcomes**: High Performance ⭐, Medium Performance 👏, Low Performance ⚙️
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Cardiac Health Decision Tree
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Root Node**: Chest Pain Severity
+- Branches based on: Chest Pain, ECG Results, Blood Pressure, Cholesterol
+- **Outcomes**: Emergency 🚨, Treatment 💊, Lifestyle Changes 🏃, Counseling 🥗
+
+## 🛠️ Tech Stack
+
+- **Framework**: Next.js 16 with React 19
+- **Styling**: Tailwind CSS v4
+- **Language**: TypeScript (strict typing, no `any` types)
+- **Icons**: Lucide React
+- **Animations**: Framer Motion
+
+## 📁 Project Structure
+
+```
+/app
+├── app/
+│   ├── page.tsx                    # Landing page
+│   ├── scenario/
+│   │   └── page.tsx                # Scenario selection
+│   └── visualize/
+│       └── [scenario]/
+│           └── page.tsx            # Dynamic visualization page
+├── components/
+│   ├── StudentAnalyzerComponent.tsx   # Student tree logic & visualization
+│   └── CardiologistTree.tsx           # Cardiac tree logic & visualization
+└── public/                         # Static assets
+```
+
+## 🧪 Preset Profiles
+
+### Student Presets
+1. **Excellent Student**: High achiever with great habits
+2. **Average Performer**: Moderate performance across metrics
+3. **Struggling Student**: Needs support and intervention
+4. **Improving Learner**: Good attendance, inconsistent work
+5. **High Potential**: Strong scores, low study hours
+
+### Cardiac Presets
+1. **Critical Emergency**: Severe symptoms requiring immediate care
+2. **High Risk Patient**: Elevated vitals and severe symptoms
+3. **Moderate Risk**: Mild symptoms with some abnormalities
+4. **Low Risk**: Mild symptoms with normal vitals
+5. **Preventive Care**: Occasional discomfort, healthy vitals
+
+## 📝 Important Notes
+
+- **Tree Structures Are Fixed**: Node conditions and decision paths are hardcoded as specified
+- **Educational Purpose**: This is a visualization tool for learning decision trees
+- **No Backend Required**: All logic runs client-side in the browser
+
+## 🎓 Educational Value
+
+This project demonstrates:
+- How decision trees make classification decisions
+- The impact of different input parameters on outcomes
+- Real-world applications of machine learning concepts
+- Visual representation of algorithmic thinking
+
+---
+
+Built with ❤️ for understanding decision trees through visualization
