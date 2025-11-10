@@ -626,14 +626,14 @@ const CardiologistInputs: React.FC<{
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">Chest Pain Severity</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Chest Pain Severity</label>
         <select
           value={data.chestPain}
           onChange={(e) => updateField('chestPain', e.target.value)}
           disabled={disabled}
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white text-sm focus:border-red-500 focus:outline-none"
+          className="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-600 rounded-lg text-white text-xs focus:border-red-500 focus:outline-none"
         >
           <option value="Severe/Radiating">Severe/Radiating</option>
           <option value="Mild/Occasional">Mild/Occasional</option>
@@ -641,12 +641,12 @@ const CardiologistInputs: React.FC<{
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">ECG Result</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">ECG Result</label>
         <select
           value={data.ecg}
           onChange={(e) => updateField('ecg', e.target.value)}
           disabled={disabled}
-          className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded-lg text-white text-sm focus:border-red-500 focus:outline-none"
+          className="w-full px-2.5 py-1.5 bg-slate-900 border border-slate-600 rounded-lg text-white text-xs focus:border-red-500 focus:outline-none"
         >
           <option value="Normal">Normal</option>
           <option value="Abnormal">Abnormal</option>
@@ -654,7 +654,7 @@ const CardiologistInputs: React.FC<{
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">Blood Pressure (mmHg)</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Blood Pressure (mmHg)</label>
         <input
           type="range"
           min="100"
@@ -662,13 +662,13 @@ const CardiologistInputs: React.FC<{
           value={data.bloodPressure}
           onChange={(e) => updateField('bloodPressure', parseInt(e.target.value))}
           disabled={disabled}
-          className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
+          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-orange-500"
         />
-        <div className="text-right text-orange-400 font-bold text-sm mt-1">{data.bloodPressure}/90</div>
+        <div className="text-right text-orange-400 font-bold text-xs mt-1">{data.bloodPressure}/90</div>
       </div>
 
       <div>
-        <label className="text-sm font-semibold text-slate-300 mb-2 block">Cholesterol (mg/dL)</label>
+        <label className="text-xs font-semibold text-slate-300 mb-1.5 block">Cholesterol (mg/dL)</label>
         <input
           type="range"
           min="150"
@@ -676,9 +676,9 @@ const CardiologistInputs: React.FC<{
           value={data.cholesterol}
           onChange={(e) => updateField('cholesterol', parseInt(e.target.value))}
           disabled={disabled}
-          className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+          className="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
         />
-        <div className="text-right text-amber-400 font-bold text-sm mt-1">{data.cholesterol} mg/dL</div>
+        <div className="text-right text-amber-400 font-bold text-xs mt-1">{data.cholesterol} mg/dL</div>
       </div>
     </div>
   );
