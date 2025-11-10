@@ -417,28 +417,30 @@ const VisualizationPage = ({ params }: { params: Promise<{ scenario: string }> }
           </div>
 
           {/* Right Panel - Visualization */}
-          <div className="lg:col-span-3 space-y-6">
-            {/* Status Bar */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-slate-400">
-                  Step {currentStep + 1} of {sequence.length || 1}
-                </span>
-                <span className="text-sm text-cyan-400 font-semibold">
-                  {sequence.length > 0 ? Math.round(((currentStep + 1) / sequence.length) * 100) : 0}%
-                </span>
+          <div className="lg:col-span-3 space-y-4">
+            {/* Status Bar - Only show when sequence exists */}
+            {sequence.length > 0 && (
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-3">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs text-slate-400">
+                    Step {currentStep + 1} of {sequence.length}
+                  </span>
+                  <span className="text-xs text-cyan-400 font-semibold">
+                    {Math.round(((currentStep + 1) / sequence.length) * 100)}%
+                  </span>
+                </div>
+                <div className="w-full bg-slate-700 rounded-full h-1.5 overflow-hidden">
+                  <div 
+                    className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 transition-all duration-500"
+                    style={{ width: `${((currentStep + 1) / sequence.length) * 100}%` }}
+                  />
+                </div>
+                <p className="text-slate-300 text-xs mt-2 leading-relaxed">{currentDescription}</p>
               </div>
-              <div className="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
-                <div 
-                  className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 transition-all duration-500"
-                  style={{ width: `${sequence.length > 0 ? ((currentStep + 1) / sequence.length) * 100 : 0}%` }}
-                />
-              </div>
-              <p className="text-slate-300 text-sm mt-3 leading-relaxed">{currentDescription}</p>
-            </div>
+            )}
 
             {/* Tree Visualization */}
-            <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-6">
+            <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-5">
               {sequence.length > 0 ? (
                 isStudent ? (
                   <TreeVisualization
@@ -455,52 +457,52 @@ const VisualizationPage = ({ params }: { params: Promise<{ scenario: string }> }
                 )
               ) : (
                 <div className="h-[650px] flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="w-24 h-24 mx-auto bg-slate-700/30 rounded-full flex items-center justify-center">
-                      <Eye className="w-12 h-12 text-slate-600" />
+                  <div className="text-center space-y-3">
+                    <div className="w-20 h-20 mx-auto bg-slate-700/30 rounded-full flex items-center justify-center">
+                      <Eye className="w-10 h-10 text-slate-600" />
                     </div>
-                    <p className="text-slate-500">Click "Execute Decision Tree" to visualize</p>
+                    <p className="text-slate-500 text-sm">Click "Execute Decision Tree" to visualize</p>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Controls */}
+            {/* Controls - Only show when sequence exists */}
             {sequence.length > 0 && (
-              <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 p-4">
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl border border-slate-700/50 p-3">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
                     <button
                       onClick={handleReset}
-                      className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-all duration-300 flex items-center gap-2"
+                      className="px-3 py-2 text-sm bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-all duration-300 flex items-center gap-1.5"
                     >
-                      <RotateCcw className="w-4 h-4" />
+                      <RotateCcw className="w-3.5 h-3.5" />
                       Reset
                     </button>
                     <button
                       onClick={() => setIsPlaying(!isPlaying)}
                       disabled={currentStep >= sequence.length - 1}
-                      className="px-5 py-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 disabled:from-slate-700 disabled:to-slate-700 text-white rounded-lg transition-all duration-300 flex items-center gap-2 disabled:cursor-not-allowed"
+                      className="px-4 py-2 text-sm bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 disabled:from-slate-700 disabled:to-slate-700 text-white rounded-lg transition-all duration-300 flex items-center gap-1.5 disabled:cursor-not-allowed"
                     >
-                      {isPlaying ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                      {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
                       {isPlaying ? 'Pause' : 'Play'}
                     </button>
                   </div>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1.5">
                     <button
                       onClick={handlePrevious}
                       disabled={currentStep === 0}
                       className="p-2 bg-slate-700 hover:bg-slate-600 disabled:bg-slate-800 text-white rounded-lg transition-all disabled:cursor-not-allowed"
                     >
-                      <ChevronLeft className="w-5 h-5" />
+                      <ChevronLeft className="w-4 h-4" />
                     </button>
                     <button
                       onClick={handleNext}
                       disabled={currentStep >= sequence.length - 1}
                       className="p-2 bg-slate-700 hover:bg-slate-600 disabled:bg-slate-800 text-white rounded-lg transition-all disabled:cursor-not-allowed"
                     >
-                      <ChevronRight className="w-5 h-5" />
+                      <ChevronRight className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
